@@ -45,6 +45,7 @@ namespace OpenGames.MandelbrodViewer
         public System.Windows.Point end = new System.Windows.Point();
 
         bool rectDrawing = false;
+        bool leftMousePressed = false;
         bool movingAround = false;
 
         public MViewer()
@@ -104,8 +105,6 @@ namespace OpenGames.MandelbrodViewer
                 }
                 resultZoom = zoom;
             }
-
-            //image.Dispose();
         }
 
         private void Window1_ContentRendered(object sender, EventArgs e)
@@ -137,7 +136,7 @@ namespace OpenGames.MandelbrodViewer
                 double xDiff = Math.Abs(start.X - Mouse.GetPosition(this).X);
                 Rectangle1.Margin = new Thickness(start.X - xDiff, start.Y - xDiff/2, Window1.Width - (start.X + xDiff), Window1.Height - (start.Y + xDiff / 2));
             }
-            if(movingAround)
+            if(movingAround && leftMousePressed)
             {
                 Window1.Left += (Mouse.GetPosition(this).X - start.X);
                 Window1.Top += (Mouse.GetPosition(this).Y - start.Y);
@@ -146,7 +145,8 @@ namespace OpenGames.MandelbrodViewer
 
         private void Window1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-           start = Mouse.GetPosition(this);
+            start = Mouse.GetPosition(this);
+            leftMousePressed = true;
 
             if(!movingAround)
             {
@@ -158,8 +158,8 @@ namespace OpenGames.MandelbrodViewer
 
         private void Window1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            
             end = Mouse.GetPosition(this);
+            leftMousePressed = false;
 
             if (!movingAround)
             {

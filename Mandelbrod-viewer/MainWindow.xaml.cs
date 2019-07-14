@@ -163,5 +163,12 @@ namespace OpenGames.MandelbrodViewer
                 MessageBox.Show("Render some pictures before saving", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void SettingsClicked(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settingsWindow = new SettingsWindow();
+
+            settingsWindow.ShowDialog();
+        }
     }
 }
