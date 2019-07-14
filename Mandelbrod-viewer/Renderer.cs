@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WpfApp2
+namespace OpenGames.MandelbrodViewer
 {
     class Renderer
     {

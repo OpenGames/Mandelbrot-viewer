@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp2"
-        xmlns:Drawing="clr-namespace:System.Drawing;assembly=System.Drawing" x:Class="WpfApp2.MainWindow"
+        xmlns:local="clr-namespace:OpenGames.MandelbrodViewer"
+        xmlns:Drawing="clr-namespace:System.Drawing;assembly=System.Drawing" x:Class="OpenGames.MandelbrodViewer.MainWindow"
         mc:Ignorable="d"
-        Title="Mandelbrot" Height="288.655" Width="439.435" BorderBrush="Black" Foreground="Black" Loaded="Window_Loaded" ResizeMode="CanMinimize">
+        Title="Mandelbrod" Height="288.655" Width="439.435" BorderBrush="Black" Foreground="Black" Loaded="Window_Loaded" ResizeMode="CanMinimize">
     <Window.Effect>
         <DropShadowEffect/>
     </Window.Effect>

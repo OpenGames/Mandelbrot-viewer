@@ -19,7 +19,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace WpfApp2
+namespace OpenGames.MandelbrodViewer
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
