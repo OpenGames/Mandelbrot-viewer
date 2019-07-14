@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenGames.MandelbrodViewer"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="248.162" Width="501.838" ResizeMode="NoResize" WindowStyle="None" Background="#FF131418" KeyDown="SettingsWindow1_KeyDown" KeyUp="SettingsWindow1_KeyUp" MouseLeftButtonDown="SettingsWindow1_MouseLeftButtonDown" MouseLeftButtonUp="SettingsWindow1_MouseLeftButtonUp" MouseMove="SettingsWindow1_MouseMove">
+        Title="Settings" Height="271.495" Width="501.838" ResizeMode="NoResize" WindowStyle="None" Background="#FF131418" KeyDown="SettingsWindow1_KeyDown" KeyUp="SettingsWindow1_KeyUp" MouseLeftButtonDown="SettingsWindow1_MouseLeftButtonDown" MouseLeftButtonUp="SettingsWindow1_MouseLeftButtonUp" MouseMove="SettingsWindow1_MouseMove">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="18px"/>
@@ -83,15 +83,16 @@
     <Grid>
         <Button Content="Accept" Margin="0,0,10,10" Width="120" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <Button Content="OK" Margin="0,0,135,10" Width="120" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_Click"/>
-        <Label Content="Width:" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" Width="84"/>
-        <TextBox Margin="99,23,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-        <Label Content="Height:" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
-        <TextBox Margin="99,65,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-        <Label Content="Current Aspect ratio:" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="196"/>
-        <TextBox HorizontalAlignment="Left" Margin="206,108,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="110"/>
-        <Label Content="By" HorizontalAlignment="Left" Margin="321,103,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="372,108,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Aspect ratio locked:" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="207,154,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Width:" HorizontalAlignment="Right" Margin="0,0,408,184" VerticalAlignment="Bottom" Width="84"/>
+        <TextBox Margin="0,0,10,184" TextWrapping="Wrap" Text="TextBox" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="393"/>
+        <Label Content="Height:" HorizontalAlignment="Right" Margin="0,0,418,142" VerticalAlignment="Bottom"/>
+        <TextBox Margin="0,0,10,142" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="393"/>
+        <Label Content="Current Aspect ratio:" HorizontalAlignment="Right" Margin="0,0,296,100" VerticalAlignment="Bottom" Width="196"/>
+        <TextBox HorizontalAlignment="Right" Margin="0,0,186,100" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="110"/>
+        <Label Content="By" HorizontalAlignment="Right" Margin="0,0,150,100" VerticalAlignment="Bottom" RenderTransformOrigin="0.462,1.685"/>
+        <TextBox HorizontalAlignment="Right" Margin="0,0,10,100" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="120"/>
+        <Label Content="Aspect ratio locked:" HorizontalAlignment="Right" Margin="0,0,309,58" VerticalAlignment="Bottom"/>
+        <CheckBox Content="CheckBox" HorizontalAlignment="Right" Margin="0,0,123,65" VerticalAlignment="Bottom" Width="120"/>
+        <Label Content="Settings" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="#3498db"/>
     </Grid>
 </Window>

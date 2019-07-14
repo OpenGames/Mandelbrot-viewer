@@ -61,6 +61,7 @@
     <Compile Include="CIEditor.xaml.cs">
       <DependentUpon>CIEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Configurator.cs" />
     <Compile Include="MViewer.xaml.cs">
       <DependentUpon>MViewer.xaml</DependentUpon>
     </Compile>
