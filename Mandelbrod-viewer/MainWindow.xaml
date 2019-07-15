@@ -4,42 +4,161 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenGames.MandelbrodViewer"
-        xmlns:Drawing="clr-namespace:System.Drawing;assembly=System.Drawing" x:Class="OpenGames.MandelbrodViewer.MainWindow"
+        xmlns:Drawing="clr-namespace:System.Drawing;assembly=System.Drawing" x:Name="Window1" x:Class="OpenGames.MandelbrodViewer.MainWindow"
         mc:Ignorable="d"
-        Title="Mandelbrod" Height="288.655" Width="439.435" BorderBrush="Black" Foreground="Black" Loaded="Window_Loaded" ResizeMode="CanMinimize" Closing="Window_Closing">
+        Title="Mandelbrod" Height="326.54" Width="574.184" Background="#FF131418" BorderBrush="Black" Foreground="Black" Loaded="Window_Loaded" ResizeMode="CanMinimize" Closing="Window_Closing" WindowStyle="None" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" MouseLeftButtonDown="Window_MouseLeftButtonDown" MouseLeftButtonUp="Window_MouseLeftButtonUp" MouseMove="Window_MouseMove">
     <Window.Effect>
         <DropShadowEffect/>
     </Window.Effect>
-    <Grid Margin="0,0,2,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
 
-        <DockPanel>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="18px"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="BorderBrush" Value="#2c3e50"/>
+            <Setter Property="Background" Value="#2c3e50"/>
+            <Setter Property="Foreground" Value="#ecf0f1"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Template">
+                <!-- Removing standart triggers -->
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Setting it back to needed color-->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#34495e"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#95a5a6"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="20px"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#ecf0f1"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="20px"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#ecf0f1"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Background" Value="#131418"/>
+            <Setter Property="BorderBrush" Value="#2980b9"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="BorderBrush" Value="#7f8c8d"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="BorderBrush" Value="#2980b9"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="true">
+                    <Setter Property="BorderBrush" Value="#3498db"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="FontSize" Value="12px"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="BorderBrush" Value="#2c3e50"/>
+            <Setter Property="Background" Value="#2c3e50"/>
+            <Setter Property="Foreground" Value="#ecf0f1"/>
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="#FF131418"/>
+            <Setter Property="FontSize" Value="16px"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#ecf0f1"/>
+        </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="Background" Value="#FF131418"/>
+            <Setter Property="FontSize" Value="18px"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#ecf0f1"/>
+            <Setter Property="BorderBrush" Value="#131418"/>
+        </Style>
+        <Style TargetType="ProgressBar">
+            <Setter Property="Background" Value="#FF131418"/>
+            <Setter Property="FontSize" Value="20px"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#ecf0f1"/>
+            <Setter Property="BorderBrush" Value="#131418"/>
+        </Style>
+
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="2"
+                  Background="#FF131418"
+                  BorderThickness="1" />
+                <Border 
+                  Grid.Column="0"
+                  CornerRadius="2,0,0,2" 
+                  Margin="1" 
+                  Background="#FF131418" 
+                  BorderThickness="0,0,1,0" />
+                <Path 
+                  x:Name="Arrow"
+                  Grid.Column="1"     
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Data="M 0 0 L 4 4 L 8 0 Z"/>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="#131418"/>
+        </ControlTemplate>
+        
+    </Window.Resources>
+
+    <Grid Margin="0,0,0,0">
+        <DockPanel Height="25" Margin="0,0,0,0" VerticalAlignment="Top">
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_Code">
-                    <MenuItem Header="_Color Interpolation" Click="MenuItem_Click" />
-                </MenuItem>
+                <MenuItem Header="_Color Interpolation" Click="MenuItem_Click"/>
                 <MenuItem Header="_Settings" Click="SettingsClicked"/>
             </Menu>
         </DockPanel>
 
-        <TextBox x:Name="XTextBox" Height="23" Margin="84,27,10,0" TextWrapping="Wrap" Text="0.000000" VerticalAlignment="Top" TextChanged="TextBox_TextChanged"/>
-        <Label Content="X" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Height="26" Width="69"/>
-        <Label Content="Y" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" Height="26" Width="69"/>
-        <Label Content="Iterations" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Height="26" Width="69"/>
-        <Label Content="Zoom" HorizontalAlignment="Left" Margin="10,116,0,0" VerticalAlignment="Top" Height="26" Width="69"/>
-        <TextBox x:Name="YTextBox" Height="23" Margin="84,58,10,0" TextWrapping="Wrap" Text="0.000000" VerticalAlignment="Top"/>
-        <TextBox x:Name="MaxIterationsTextBox" Height="23" Margin="84,89,10,0" TextWrapping="Wrap" Text="150" VerticalAlignment="Top"/>
-        <TextBox x:Name="ZoomTextBox" Height="23" Margin="84,120,10,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top"/>
-        <Button Content="Render" Margin="0,0,10,7" RenderTransformOrigin="-0.501,-0.19" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74" Click="Button_Click"/>
-        <Button Content="Save" Margin="0,0,89,7" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74" Click="Button_Click_1"/>
-        <ProgressBar x:Name="ProgressBar1" Margin="10,0,10,38" Height="26" VerticalAlignment="Bottom"/>
-        <ComboBox x:Name="ComboBox1" Margin="84,148,0,0" VerticalAlignment="Top" Height="27" HorizontalAlignment="Left" Width="120" SelectionChanged="ComboBox_SelectionChanged"/>
-        <ComboBox x:Name="ComboBox2" Margin="0,148,10,0" VerticalAlignment="Top" Height="27" HorizontalAlignment="Right" Width="120" SelectionChanged="ComboBox_SelectionChanged_1">
-        </ComboBox>
-        <Label Content="Color 2" Margin="0,148,135,0" VerticalAlignment="Top" Height="27" HorizontalAlignment="Right" Width="56"/>
-        <Label Content="Color 1" Margin="10,148,0,0" VerticalAlignment="Top" Height="27" HorizontalAlignment="Left" Width="74"/>
+        <TextBox x:Name="XTextBox" Margin="131,48,10,0" TextWrapping="Wrap" Text="0.000000" VerticalAlignment="Top" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="YTextBox" Margin="131,85,10,0" TextWrapping="Wrap" Text="0.000000" VerticalAlignment="Top"/>
+        <TextBox x:Name="MaxIterationsTextBox" Margin="131,127,10,0" TextWrapping="Wrap" Text="150" VerticalAlignment="Top"/>
+        <TextBox x:Name="ZoomTextBox" Margin="131,169,10,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top"/>
+        <Button Content="Render" Margin="0,0,10,7" RenderTransformOrigin="-0.501,-0.19" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Button_Click"/>
+        <Button Content="Save" Margin="0,0,135,7" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Button_Click_1"/>
+        <ProgressBar x:Name="ProgressBar1" Margin="11,0,9,42" Height="29" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="ComboBox1" Margin="89,210,0,0" VerticalAlignment="Top" Height="33" HorizontalAlignment="Left" Width="120" SelectionChanged="ComboBox_SelectionChanged" RenderTransformOrigin="0.492,1.182"/>
+        <ComboBox x:Name="ComboBox2" Margin="0,210,10,0" VerticalAlignment="Top" Height="33" HorizontalAlignment="Right" Width="120" SelectionChanged="ComboBox_SelectionChanged_1"></ComboBox>
+        <Label Content="Color 2" Margin="0,206,135,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        <Label Content="Color 1" Margin="10,206,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="X" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
+        <Label Content="Y" HorizontalAlignment="Left" Margin="11,80,0,0" VerticalAlignment="Top"/>
+        <Label Content="Iterations" HorizontalAlignment="Left" Margin="11,122,0,0" VerticalAlignment="Top"/>
+        <Label Content="Zoom" HorizontalAlignment="Left" Margin="11,164,0,0" VerticalAlignment="Top"/>
     </Grid>
 
 

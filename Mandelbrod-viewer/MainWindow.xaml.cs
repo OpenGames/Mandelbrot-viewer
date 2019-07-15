@@ -43,6 +43,12 @@ namespace OpenGames.MandelbrodViewer
         Bitmap image;
         Configurator configurator;
 
+        public System.Windows.Point start = new System.Windows.Point();
+        public System.Windows.Point end = new System.Windows.Point();
+
+        bool leftMousePressed = false;
+        bool movingAround = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -186,6 +192,49 @@ namespace OpenGames.MandelbrodViewer
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             configurator.Save();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftShift)
+            {
+                movingAround = true;
+                Cursor = Cursors.Cross;
+            }
+            if (e.Key == Key.Escape)
+            {
+                Close();
+            }
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftShift)
+            {
+                movingAround = false;
+                Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            start = Mouse.GetPosition(this);
+            leftMousePressed = true;
+        }
+
+        private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            end = Mouse.GetPosition(this);
+            leftMousePressed = false;
+        }
+
+        private void Window_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (movingAround && leftMousePressed)
+            {
+                Window1.Left += (Mouse.GetPosition(this).X - start.X);
+                Window1.Top += (Mouse.GetPosition(this).Y - start.Y);
+            }
         }
     }
 }
