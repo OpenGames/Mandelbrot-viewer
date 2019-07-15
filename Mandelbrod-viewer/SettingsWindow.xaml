@@ -99,5 +99,6 @@
         <Label Content="Settings" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="#3498db"/>
         <Label Content="Immediate rendering:" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="ImmediateRenderingCheckBox" Content="" HorizontalAlignment="Left" Margin="223,214,0,0" VerticalAlignment="Top" Checked="ImmediateRenderingCheckBox_Checked" Unchecked="ImmediateRenderingCheckBox_Checked"/>
+        <Button Content="Fullscreen" HorizontalAlignment="Left" Margin="10,256,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
     </Grid>
 </Window>

@@ -183,5 +183,11 @@ namespace OpenGames.MandelbrodViewer
         {
             settings.immediateRender = (bool)ImmediateRenderingCheckBox.IsChecked;
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            HeightTextbox.Text = SystemParameters.PrimaryScreenHeight.ToString();
+            WidthTextbox.Text = SystemParameters.PrimaryScreenWidth.ToString();
+        }
     }
 }
