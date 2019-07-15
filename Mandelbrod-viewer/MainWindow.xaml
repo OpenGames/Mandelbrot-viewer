@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OpenGames.MandelbrodViewer"
         xmlns:Drawing="clr-namespace:System.Drawing;assembly=System.Drawing" x:Class="OpenGames.MandelbrodViewer.MainWindow"
         mc:Ignorable="d"
-        Title="Mandelbrod" Height="288.655" Width="439.435" BorderBrush="Black" Foreground="Black" Loaded="Window_Loaded" ResizeMode="CanMinimize">
+        Title="Mandelbrod" Height="288.655" Width="439.435" BorderBrush="Black" Foreground="Black" Loaded="Window_Loaded" ResizeMode="CanMinimize" Closing="Window_Closing">
     <Window.Effect>
         <DropShadowEffect/>
     </Window.Effect>

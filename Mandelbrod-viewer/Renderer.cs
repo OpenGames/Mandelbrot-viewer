@@ -17,6 +17,8 @@ namespace OpenGames.MandelbrodViewer
     {
 
         public int maxIterations = 150;
+        public double xRadius;
+        public double yRadius;
         public double zoom = 1;
         public double xStart = 0;
         public double yStart = 0;
@@ -27,10 +29,8 @@ namespace OpenGames.MandelbrodViewer
 
         public double done;
 
-        public double xMin;
-        public double xMax;
-        public double yMin;
-        public double yMax;
+        public Settings settings;
+        
 
         public delegate void renderComplete(Bitmap image);
         public delegate void renderState(double p);
@@ -54,18 +54,14 @@ namespace OpenGames.MandelbrodViewer
         {
 
             Thread thread = new Thread(() => { 
-                xMin = -2 / zoom + xStart;
-                xMax = 2 / zoom + xStart;
-                yMin = -1 / zoom + yStart;
-                yMax = 1 / zoom + yStart;
+                xRadius = 2 / zoom; // <!> from -2 to 2
+                yRadius = xRadius / (settings.aspectRatio);
 
-                width = 2 * 800;
-                height = 1 * 800;
+                width = settings.resolutionWidth;
+                height = settings.resolutionHeight;
 
-
-
-                xEps = Math.Abs(xMin - xMax) / width;
-                yEps = Math.Abs(yMin - yMax) / height;
+                xEps = 2 * xRadius / width;
+                yEps = 2 * yRadius / height;
 
                 Bitmap image = new Bitmap(width, height);
 
@@ -79,8 +75,8 @@ namespace OpenGames.MandelbrodViewer
 
                     for (int y = 0; y < height; y++)
                     {
-                        double p = x * xEps + xMin;
-                        double q = y * yEps + yMin;
+                        double p = x * xEps + (xStart - xRadius);
+                        double q = y * yEps + (yStart - yRadius);
 
                         double xn = 0;
                         double yn = 0;

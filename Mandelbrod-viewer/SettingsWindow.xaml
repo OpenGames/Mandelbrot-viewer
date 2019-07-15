@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenGames.MandelbrodViewer"
         mc:Ignorable="d"
-        Title="Settings" Height="271.495" Width="501.838" ResizeMode="NoResize" WindowStyle="None" Background="#FF131418" KeyDown="SettingsWindow1_KeyDown" KeyUp="SettingsWindow1_KeyUp" MouseLeftButtonDown="SettingsWindow1_MouseLeftButtonDown" MouseLeftButtonUp="SettingsWindow1_MouseLeftButtonUp" MouseMove="SettingsWindow1_MouseMove">
+        Title="Settings" Height="296.495" Width="501.838" ResizeMode="NoResize" WindowStyle="None" Background="#FF131418" KeyDown="SettingsWindow1_KeyDown" KeyUp="SettingsWindow1_KeyUp" MouseLeftButtonDown="SettingsWindow1_MouseLeftButtonDown" MouseLeftButtonUp="SettingsWindow1_MouseLeftButtonUp" MouseMove="SettingsWindow1_MouseMove" Loaded="SettingsWindow1_Loaded">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="18px"/>
@@ -58,6 +58,9 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="BorderBrush" Value="#7f8c8d"/>
+                </Trigger>
                 <Trigger Property="IsMouseOver" Value="true">
                     <Setter Property="BorderBrush" Value="#2980b9"/>
                 </Trigger>
@@ -83,16 +86,18 @@
     <Grid>
         <Button Content="Accept" Margin="0,0,10,10" Width="120" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <Button Content="OK" Margin="0,0,135,10" Width="120" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_Click"/>
-        <Label Content="Width:" HorizontalAlignment="Right" Margin="0,0,408,184" VerticalAlignment="Bottom" Width="84"/>
-        <TextBox Margin="0,0,10,184" TextWrapping="Wrap" Text="TextBox" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="393"/>
-        <Label Content="Height:" HorizontalAlignment="Right" Margin="0,0,418,142" VerticalAlignment="Bottom"/>
-        <TextBox Margin="0,0,10,142" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="393"/>
-        <Label Content="Current Aspect ratio:" HorizontalAlignment="Right" Margin="0,0,296,100" VerticalAlignment="Bottom" Width="196"/>
-        <TextBox HorizontalAlignment="Right" Margin="0,0,186,100" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="110"/>
-        <Label Content="By" HorizontalAlignment="Right" Margin="0,0,150,100" VerticalAlignment="Bottom" RenderTransformOrigin="0.462,1.685"/>
-        <TextBox HorizontalAlignment="Right" Margin="0,0,10,100" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="120"/>
-        <Label Content="Aspect ratio locked:" HorizontalAlignment="Right" Margin="0,0,309,58" VerticalAlignment="Bottom"/>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Right" Margin="0,0,123,65" VerticalAlignment="Bottom" Width="120"/>
+        <Label Content="Width:" HorizontalAlignment="Right" Margin="0,0,408,217" VerticalAlignment="Bottom" Width="84"/>
+        <TextBox x:Name="WidthTextbox" Margin="0,0,10,217" TextWrapping="Wrap" Text="TextBox" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="393" TextChanged="WidthTextbox_TextChanged"/>
+        <Label Content="Height:" HorizontalAlignment="Right" Margin="0,0,418,175" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="HeightTextbox" Margin="0,0,10,175" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="393" TextChanged="HeightTextbox_TextChanged"/>
+        <Label Content="Current Aspect ratio:" HorizontalAlignment="Right" Margin="0,0,296,133" VerticalAlignment="Bottom" Width="196"/>
+        <TextBox x:Name="ARXTextbox" HorizontalAlignment="Right" Margin="0,0,186,133" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="110"/>
+        <Label Content="By" HorizontalAlignment="Right" Margin="0,0,155,133" VerticalAlignment="Bottom" RenderTransformOrigin="0.462,1.685"/>
+        <TextBox x:Name="ARYTextbox" HorizontalAlignment="Right" Margin="0,0,10,133" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="120"/>
+        <Label Content="Aspect ratio locked:" HorizontalAlignment="Right" Margin="0,0,309,91" VerticalAlignment="Bottom"/>
+        <CheckBox x:Name="ARLockedCheckBox" Content="" HorizontalAlignment="Right" Margin="0,0,99,97" VerticalAlignment="Bottom" Width="120" Checked="ARLockedCheckBox_Checked" Unchecked="ARLockedCheckBox_Checked"/>
         <Label Content="Settings" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="#3498db"/>
+        <Label Content="Immediate rendering:" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="" HorizontalAlignment="Left" Margin="223,214,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

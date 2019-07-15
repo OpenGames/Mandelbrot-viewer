@@ -26,10 +26,8 @@ namespace OpenGames.MandelbrodViewer
     public partial class MViewer : Window
     {
         public Bitmap image;
-        public double xMin;
-        public double xMax;
-        public double yMin;
-        public double yMax;
+        public double xRadius;
+        public double yRadius;
         public double xStart;
         public double yStart;
         public double zoom;
@@ -37,6 +35,8 @@ namespace OpenGames.MandelbrodViewer
         public double resultZoom;
         public double resultX;
         public double resultY;
+
+        private Settings settings;
 
         private double xEps;
         private double yEps;
@@ -47,6 +47,8 @@ namespace OpenGames.MandelbrodViewer
         bool rectDrawing = false;
         bool leftMousePressed = false;
         bool movingAround = false;
+
+        internal Settings Settings { get => settings; set => settings = value; }
 
         public MViewer()
         {
@@ -62,8 +64,15 @@ namespace OpenGames.MandelbrodViewer
 
                 Image1.Source = ImageSourceFromBitmap(image);
 
-                xEps = Math.Abs(xMin - xMax) / image.Width;
-                yEps = Math.Abs(yMin - yMax) / image.Height;
+                xEps = 2 * xRadius / image.Width;
+                yEps = 2 * yRadius / image.Height;
+
+                var p = PointFromScreen(new System.Windows.Point(0, 0));
+                CenterWindowOnScreen();
+                Topmost = true;
+
+                //System.Windows.SystemParameters.PrimaryScreenWidth;
+                //System.Windows.SystemParameters.PrimaryScreenHeight;
             }
             catch { }
         }
@@ -87,8 +96,8 @@ namespace OpenGames.MandelbrodViewer
             DialogResult = true;
             if(end.X != start.X)
             {
-                resultX = start.X * xEps + xMin;
-                resultY = start.Y * yEps + yMin;
+                resultX = start.X * xEps + (xStart - xRadius);
+                resultY = start.Y * yEps + (yStart - yRadius);
                 resultZoom = zoom *  image.Width / (2 * Math.Abs(start.X - end.X));
             }
             else
@@ -100,8 +109,8 @@ namespace OpenGames.MandelbrodViewer
                 }
                 else
                 {
-                    resultX = start.X * xEps + xMin;
-                    resultY = start.Y * yEps + yMin;
+                    resultX = start.X * xEps + (xStart - xRadius);
+                    resultY = start.Y * yEps + (yStart - yRadius);
                 }
                 resultZoom = zoom;
             }
@@ -113,8 +122,8 @@ namespace OpenGames.MandelbrodViewer
 
         private void Window1_MouseMove(object sender, MouseEventArgs e)
         {
-            double x = Mouse.GetPosition(this).X * xEps + xMin;
-            double y = Mouse.GetPosition(this).Y * yEps + yMin;
+            double x = Mouse.GetPosition(this).X * xEps + (xStart - xRadius);
+            double y = Mouse.GetPosition(this).Y * yEps + (yStart - yRadius);
 
             XLabel.Content = string.Format("X: {0}", x);
             YLabel.Content = string.Format("Y: {0}", y);
@@ -134,7 +143,7 @@ namespace OpenGames.MandelbrodViewer
             if (rectDrawing)
             {
                 double xDiff = Math.Abs(start.X - Mouse.GetPosition(this).X);
-                Rectangle1.Margin = new Thickness(start.X - xDiff, start.Y - xDiff/2, Window1.Width - (start.X + xDiff), Window1.Height - (start.Y + xDiff / 2));
+                Rectangle1.Margin = new Thickness(start.X - xDiff, start.Y - xDiff / settings.aspectRatio, Window1.Width - (start.X + xDiff), Window1.Height - (start.Y + xDiff / settings.aspectRatio));
             }
             if(movingAround && leftMousePressed)
             {
@@ -179,6 +188,10 @@ namespace OpenGames.MandelbrodViewer
                 movingAround = true;
                 Cursor = Cursors.Cross;
             }
+            if(e.Key == Key.F11)
+            {
+                //this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            }
         }
 
         private void Window1_KeyUp(object sender, KeyEventArgs e)
@@ -188,6 +201,16 @@ namespace OpenGames.MandelbrodViewer
                 movingAround = false;
                 Cursor = Cursors.Arrow;
             }
+        }
+
+        private void CenterWindowOnScreen()
+        {
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double windowWidth = this.Width;
+            double windowHeight = this.Height;
+            this.Left = (screenWidth / 2) - (windowWidth / 2);
+            this.Top = (screenHeight / 2) - (windowHeight / 2);
         }
     }
 }

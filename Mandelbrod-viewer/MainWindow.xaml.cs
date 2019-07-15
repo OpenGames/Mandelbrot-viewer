@@ -41,6 +41,7 @@ namespace OpenGames.MandelbrodViewer
 
         Renderer renderer;
         Bitmap image;
+        Configurator configurator;
 
         public MainWindow()
         {
@@ -58,6 +59,8 @@ namespace OpenGames.MandelbrodViewer
             ComboBox1.SelectedItem = KnownColor.Black;
             ComboBox2.SelectedItem = KnownColor.Blue;
 
+            configurator = new Configurator();
+
             renderer = new Renderer();
             renderer.onRenderComplete += (i) => {
                 image = i;
@@ -66,10 +69,11 @@ namespace OpenGames.MandelbrodViewer
                 {
                     MViewer viewer = new MViewer();
 
-                    viewer.xMin = renderer.xMin;
-                    viewer.xMax = renderer.xMax;
-                    viewer.yMin = renderer.yMin;
-                    viewer.yMax = renderer.yMax;
+                    //viewer.sett
+
+                    viewer.Settings = configurator.settings;
+                    viewer.xRadius = renderer.xRadius;
+                    viewer.yRadius = renderer.yRadius;
                     viewer.xStart = renderer.xStart;
                     viewer.yStart = renderer.yStart;
                     viewer.zoom = renderer.zoom;
@@ -113,6 +117,8 @@ namespace OpenGames.MandelbrodViewer
             renderer.xStart = Convert.ToDouble(XTextBox.Text.Replace(".", ","));
             renderer.yStart = Convert.ToDouble(YTextBox.Text.Replace(".", ","));
             renderer.zoom = Convert.ToDouble(ZoomTextBox.Text.Replace(".", ","));
+
+            renderer.settings = configurator.settings;
 
             renderer.color1 = System.Drawing.Color.FromKnownColor((KnownColor)ComboBox1.SelectedItem);
             renderer.color2 = System.Drawing.Color.FromKnownColor((KnownColor)ComboBox2.SelectedItem);
@@ -167,8 +173,18 @@ namespace OpenGames.MandelbrodViewer
         private void SettingsClicked(object sender, RoutedEventArgs e)
         {
             SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.Settings = this.configurator.settings;
+            bool r = (bool)settingsWindow.ShowDialog();
 
-            settingsWindow.ShowDialog();
+            if(r)
+            {
+                this.configurator.settings = settingsWindow.Settings;
+            }
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            configurator.Save();
         }
     }
 }
