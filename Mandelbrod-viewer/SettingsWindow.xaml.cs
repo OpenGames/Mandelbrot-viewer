@@ -94,6 +94,7 @@ namespace OpenGames.MandelbrodViewer
             ARXTextbox.Text = settings.aspectRatioX.ToString();
             ARYTextbox.Text = settings.aspectRatioY.ToString();
             ARLockedCheckBox.IsChecked = settings.aspectRatioLocked;
+            ImmediateRenderingCheckBox.IsChecked = settings.immediateRender;
 
             ARXTextbox.IsEnabled = false;
             ARYTextbox.IsEnabled = false;
@@ -178,5 +179,9 @@ namespace OpenGames.MandelbrodViewer
             }
         }
 
+        private void ImmediateRenderingCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            settings.immediateRender = (bool)ImmediateRenderingCheckBox.IsChecked;
+        }
     }
 }

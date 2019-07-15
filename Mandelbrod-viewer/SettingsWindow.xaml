@@ -98,6 +98,6 @@
         <CheckBox x:Name="ARLockedCheckBox" Content="" HorizontalAlignment="Right" Margin="0,0,99,97" VerticalAlignment="Bottom" Width="120" Checked="ARLockedCheckBox_Checked" Unchecked="ARLockedCheckBox_Checked"/>
         <Label Content="Settings" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="#3498db"/>
         <Label Content="Immediate rendering:" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="" HorizontalAlignment="Left" Margin="223,214,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="ImmediateRenderingCheckBox" Content="" HorizontalAlignment="Left" Margin="223,214,0,0" VerticalAlignment="Top" Checked="ImmediateRenderingCheckBox_Checked" Unchecked="ImmediateRenderingCheckBox_Checked"/>
     </Grid>
 </Window>

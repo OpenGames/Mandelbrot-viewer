@@ -19,6 +19,7 @@ namespace OpenGames.MandelbrodViewer
         public double initialY;
         public double initialZoom;
         public bool aspectRatioLocked;
+        public bool immediateRender;
     }
 
     class Configurator
@@ -44,6 +45,7 @@ namespace OpenGames.MandelbrodViewer
                 settings.initialY               = double.Parse(values[7]);
                 settings.initialZoom            = double.Parse(values[8]);
                 settings.aspectRatioLocked      = bool.Parse(values[9]);
+                settings.immediateRender        = bool.Parse(values[10]);
             }
             else
             {
@@ -62,6 +64,7 @@ namespace OpenGames.MandelbrodViewer
                 settings.initialZoom = 1;
 
                 settings.aspectRatioLocked = true;
+                settings.immediateRender = false;
             }
         }
 
@@ -77,6 +80,7 @@ namespace OpenGames.MandelbrodViewer
             File.AppendAllText(Directory.GetCurrentDirectory() + configFilePath, settings.initialY.ToString() + "\n");
             File.AppendAllText(Directory.GetCurrentDirectory() + configFilePath, settings.initialZoom.ToString() + "\n");
             File.AppendAllText(Directory.GetCurrentDirectory() + configFilePath, settings.aspectRatioLocked.ToString() + "\n");
+            File.AppendAllText(Directory.GetCurrentDirectory() + configFilePath, settings.immediateRender.ToString() + "\n");
         }
 
         public static int GCD(int a, int b)

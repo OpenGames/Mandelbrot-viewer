@@ -37,6 +37,7 @@ namespace OpenGames.MandelbrodViewer
         public double resultY;
 
         private Settings settings;
+        private MainWindow mW;
 
         private double xEps;
         private double yEps;
@@ -49,6 +50,10 @@ namespace OpenGames.MandelbrodViewer
         bool movingAround = false;
 
         internal Settings Settings { get => settings; set => settings = value; }
+        internal MainWindow MW { get => mW; set => mW = value; }
+
+
+        private Renderer renderer = new Renderer();
 
         public MViewer()
         {
@@ -67,12 +72,34 @@ namespace OpenGames.MandelbrodViewer
                 xEps = 2 * xRadius / image.Width;
                 yEps = 2 * yRadius / image.Height;
 
-                var p = PointFromScreen(new System.Windows.Point(0, 0));
                 CenterWindowOnScreen();
                 Topmost = true;
 
-                //System.Windows.SystemParameters.PrimaryScreenWidth;
-                //System.Windows.SystemParameters.PrimaryScreenHeight;
+
+                renderer.onRenderComplete += (i) => {
+                    this.image.Dispose();
+                    this.image = i;
+
+                    //-----
+                    xRadius = renderer.xRadius;
+                    yRadius = renderer.yRadius;
+                    xStart = renderer.xStart;
+                    yStart = renderer.yStart;
+                    zoom = renderer.zoom;
+
+                    xEps = 2 * xRadius / image.Width;
+                    yEps = 2 * yRadius / image.Height;
+                    //-----
+
+                    Dispatcher.Invoke(() => {
+                        Image1.Source = ImageSourceFromBitmap(image);
+                        ProgressBar1.Visibility = Visibility.Hidden;
+                    });
+                };
+
+                renderer.renderProgressChanged += (d) => {
+                    Dispatcher.Invoke(() => { ProgressBar1.Value = d; });
+                };
             }
             catch { }
         }
@@ -94,26 +121,7 @@ namespace OpenGames.MandelbrodViewer
         private void Window1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DialogResult = true;
-            if(end.X != start.X)
-            {
-                resultX = start.X * xEps + (xStart - xRadius);
-                resultY = start.Y * yEps + (yStart - yRadius);
-                resultZoom = zoom *  image.Width / (2 * Math.Abs(start.X - end.X));
-            }
-            else
-            {
-                if (start.X == 0 && start.Y == 0)
-                {
-                    resultX = xStart;
-                    resultY = yStart;
-                }
-                else
-                {
-                    resultX = start.X * xEps + (xStart - xRadius);
-                    resultY = start.Y * yEps + (yStart - yRadius);
-                }
-                resultZoom = zoom;
-            }
+            CalcResults();
         }
 
         private void Window1_ContentRendered(object sender, EventArgs e)
@@ -181,7 +189,31 @@ namespace OpenGames.MandelbrodViewer
         {
             if(e.Key == Key.Enter)
             {
-                Close();
+                if (settings.immediateRender)
+                {
+                    CalcResults();
+
+                    renderer.maxIterations = Convert.ToInt32(MW.MaxIterationsTextBox.Text);
+                    renderer.xStart = resultX;
+                    renderer.yStart = resultY;
+                    renderer.zoom = resultZoom;
+
+                    renderer.settings = settings;
+
+                    renderer.color1 = System.Drawing.Color.FromKnownColor((KnownColor)MW.ComboBox1.SelectedItem);
+                    renderer.color2 = System.Drawing.Color.FromKnownColor((KnownColor)MW.ComboBox2.SelectedItem);
+
+                    renderer.InnerCode = MW.InterpolationCode;
+                    renderer.DOMCompile();
+
+                    renderer.RenderAsync();
+                    ProgressBar1.Margin = new Thickness(100, Window1.Height / 2 - 10, 100, 0);
+                    ProgressBar1.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    Close();
+                }
             }
             if(e.Key == Key.LeftShift)
             {
@@ -191,6 +223,10 @@ namespace OpenGames.MandelbrodViewer
             if(e.Key == Key.F11)
             {
                 //this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            }
+            if(e.Key == Key.Escape)
+            {
+                Close();
             }
         }
 
@@ -211,6 +247,30 @@ namespace OpenGames.MandelbrodViewer
             double windowHeight = this.Height;
             this.Left = (screenWidth / 2) - (windowWidth / 2);
             this.Top = (screenHeight / 2) - (windowHeight / 2);
+        }
+
+        private void CalcResults()
+        {
+            if (end.X != start.X)
+            {
+                resultX = start.X * xEps + (xStart - xRadius);
+                resultY = start.Y * yEps + (yStart - yRadius);
+                resultZoom = zoom * image.Width / (2 * Math.Abs(start.X - end.X));
+            }
+            else
+            {
+                if (start.X == 0 && start.Y == 0)
+                {
+                    resultX = xStart;
+                    resultY = yStart;
+                }
+                else
+                {
+                    resultX = start.X * xEps + (xStart - xRadius);
+                    resultY = start.Y * yEps + (yStart - yRadius);
+                }
+                resultZoom = zoom;
+            }
         }
     }
 }

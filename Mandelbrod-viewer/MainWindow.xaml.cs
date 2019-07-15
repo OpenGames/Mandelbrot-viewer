@@ -27,7 +27,7 @@ namespace OpenGames.MandelbrodViewer
     public partial class MainWindow : Window
     {
 
-        private string InterpolationCode = @"(color1, color2, fraction) => { 
+        public string InterpolationCode = @"(color1, color2, fraction) => { 
                 return Color.FromArgb(
                 (int)((color2.R - color1.R) *  Math.Pow(Math.Sin(Math.PI*fraction), 2)   ) + color1.R,
                 (int)((color2.G - color1.G) *  Math.Pow(Math.Sin(Math.PI*fraction), 2)   ) + color1.G,
@@ -71,6 +71,7 @@ namespace OpenGames.MandelbrodViewer
 
                     //viewer.sett
 
+                    viewer.MW = this;
                     viewer.Settings = configurator.settings;
                     viewer.xRadius = renderer.xRadius;
                     viewer.yRadius = renderer.yRadius;
