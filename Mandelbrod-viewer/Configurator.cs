@@ -25,6 +25,7 @@ namespace OpenGames.MandelbrodViewer
     class Configurator
     {
         static string configFilePath = "\\resources\\config.cfg";
+        static string configFolder = "\\resources";
 
         public Settings settings = new Settings();
         private FileStream fs;
@@ -49,6 +50,7 @@ namespace OpenGames.MandelbrodViewer
             }
             else
             {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + configFolder);
                 fs = File.Create(Directory.GetCurrentDirectory() + configFilePath);
                 fs.Close();
 
