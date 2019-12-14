@@ -40,7 +40,11 @@ namespace OpenGames.MandelbrodViewer
         // sin^2(pi*x) =                                            Math.Pow(Math.Sin(Math.PI*fraction), 2)                                             -- sin
 
         Renderer renderer;
+<<<<<<< HEAD
         public Bitmap image;
+=======
+        Bitmap image;
+>>>>>>> 86612e43dd7c7a3f5993e81787a34f0aaa1c5208
         Configurator configurator;
 
         public System.Windows.Point start = new System.Windows.Point();
@@ -181,7 +185,10 @@ namespace OpenGames.MandelbrodViewer
         {
             SettingsWindow settingsWindow = new SettingsWindow();
             settingsWindow.Settings = this.configurator.settings;
+<<<<<<< HEAD
             settingsWindow.Configurator = this.configurator;
+=======
+>>>>>>> 86612e43dd7c7a3f5993e81787a34f0aaa1c5208
             bool r = (bool)settingsWindow.ShowDialog();
 
             if(r)

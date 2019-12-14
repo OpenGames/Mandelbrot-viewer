@@ -23,13 +23,19 @@ namespace OpenGames.MandelbrodViewer
         private System.Windows.Point end = new System.Windows.Point();
 
         private Settings settings;
+<<<<<<< HEAD
         private Configurator configurator;
+=======
+>>>>>>> 86612e43dd7c7a3f5993e81787a34f0aaa1c5208
 
         bool leftMousePressed = false;
         bool movingAround = false;
 
         internal Settings Settings { get => settings; set => settings = value; }
+<<<<<<< HEAD
         internal Configurator Configurator { get => configurator; set => configurator = value; }
+=======
+>>>>>>> 86612e43dd7c7a3f5993e81787a34f0aaa1c5208
 
         public SettingsWindow()
         {
@@ -191,10 +197,13 @@ namespace OpenGames.MandelbrodViewer
             HeightTextbox.Text = SystemParameters.PrimaryScreenHeight.ToString();
             WidthTextbox.Text = SystemParameters.PrimaryScreenWidth.ToString();
         }
+<<<<<<< HEAD
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             Configurator.Save();
         }
+=======
+>>>>>>> 86612e43dd7c7a3f5993e81787a34f0aaa1c5208
     }
 }

@@ -77,6 +77,10 @@ namespace OpenGames.MandelbrodViewer
 
 
                 renderer.onRenderComplete += (i) => {
+<<<<<<< HEAD
+=======
+                    this.image.Dispose();
+>>>>>>> 86612e43dd7c7a3f5993e81787a34f0aaa1c5208
                     this.image = i;
 
                     //-----
@@ -90,8 +94,11 @@ namespace OpenGames.MandelbrodViewer
                     yEps = 2 * yRadius / image.Height;
                     //-----
 
+<<<<<<< HEAD
                     this.mW.image = i;
 
+=======
+>>>>>>> 86612e43dd7c7a3f5993e81787a34f0aaa1c5208
                     Dispatcher.Invoke(() => {
                         Image1.Source = ImageSourceFromBitmap(image);
                         ProgressBar1.Visibility = Visibility.Hidden;
@@ -207,7 +214,10 @@ namespace OpenGames.MandelbrodViewer
                     renderer.InnerCode = MW.InterpolationCode;
                     renderer.DOMCompile();
 
+<<<<<<< HEAD
                     image?.Dispose();
+=======
+>>>>>>> 86612e43dd7c7a3f5993e81787a34f0aaa1c5208
                     renderer.RenderAsync();
                     ProgressBar1.Margin = new Thickness(100, Window1.Height / 2 - 10, 100, 0);
                     ProgressBar1.Visibility = Visibility.Visible;

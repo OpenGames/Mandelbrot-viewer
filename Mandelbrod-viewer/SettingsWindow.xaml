@@ -84,7 +84,11 @@
     </Window.Resources>
 
     <Grid>
+<<<<<<< HEAD
         <Button Content="Accept" Margin="0,0,10,10" Width="120" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_Click_2"/>
+=======
+        <Button Content="Accept" Margin="0,0,10,10" Width="120" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+>>>>>>> 86612e43dd7c7a3f5993e81787a34f0aaa1c5208
         <Button Content="OK" Margin="0,0,135,10" Width="120" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_Click"/>
         <Label Content="Width:" HorizontalAlignment="Right" Margin="0,0,408,217" VerticalAlignment="Bottom" Width="84"/>
         <TextBox x:Name="WidthTextbox" Margin="0,0,10,217" TextWrapping="Wrap" Text="TextBox" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="393" TextChanged="WidthTextbox_TextChanged"/>
