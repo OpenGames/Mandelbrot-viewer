@@ -1,0 +1,18 @@
+﻿<Window x:Name="Window1" x:Class="OpenGames.MandelbrodViewer.MViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenGames.MandelbrodViewer"
+        mc:Ignorable="d"
+        Title="MViewer" Height="454.411" Width="730.515" Loaded="Window_Loaded" Closing="Window1_Closing" ContentRendered="Window1_ContentRendered" MouseMove="Window1_MouseMove" MouseLeftButtonDown="Window1_MouseLeftButtonDown" MouseLeftButtonUp="Window1_MouseLeftButtonUp" KeyDown="Window1_KeyDown" BorderBrush="Black" Visibility="Visible" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanMinimize" KeyUp="Window1_KeyUp">
+    <Grid>
+        <Image x:Name="Image1"/>
+        <Line Name="Line1" Visibility="Visible" Stroke="Red" StrokeThickness="0.75" />
+        <Line Name="Line2" Visibility="Visible" Stroke="Red" StrokeThickness="0.75" />
+        <Rectangle Name="Rectangle1" Visibility="Hidden" Stroke="Red" StrokeThickness="1"/>
+        <Label Name="XLabel" Content="Label" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Foreground="Red" FontWeight="Bold" FontSize="14"/>
+        <Label Name="YLabel" Content="Label" Margin="0,41,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Foreground="Red" FontWeight="Bold" FontSize="14"/>
+        <ProgressBar x:Name="ProgressBar1" Height="20" VerticalAlignment="Top" Visibility="Hidden"/>
+    </Grid>
+</Window>
